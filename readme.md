@@ -54,7 +54,7 @@ In this step, we combine **Gaussian Splatting** for high-quality visual renderin
 
 #### Step 1: Load and Align the Gaussian Scene and Collision Mesh
 
-- Begin by double-clicking the generated `.usdz` file to extract its contents. Locate `gauss.usda` in the extracted folder and drag it into the **Isaac Sim GUI viewport** to load the Gaussian splatting scene used for rendering.  
+- Begin by double-clicking the generated `.usdz` file to extract its contents. Locate `default.usda` in the extracted folder and drag it into the **Isaac Sim GUI viewport** to load the Gaussian splatting scene used for rendering.  
 - Next, in the **Stage** panel, create an Xform at `/World/Xform`, select it, and add a reference to the `texture_mesh.glb` file using an **absolute file path**. At this point, the scene should contain `/World/gauss` for Gaussian rendering and `/World/Xform` for mesh-based collisions.  
 - These two assets must then be spatially aligned; in most cases, rotating `/World/Xform` by **180 degrees around the Z axis** is sufficient, although some scenes may also require scaling (commonly ×100) or additional translation and rotation adjustments. Make sure that the Gaussian splats and mesh geometry overlap correctly in the viewport.
 
