@@ -56,16 +56,16 @@ In this step, we combine **Gaussian Splatting** for high-quality visual renderin
 
 - Begin by double-clicking the generated `.usdz` file to extract its contents. Locate `default.usda` in the extracted folder and drag it into the **Isaac Sim GUI viewport** to load the Gaussian splatting scene used for rendering.  
 - Next, in the **Stage** panel, create an Xform at `/World/Xform`, select it, and add a reference to the `texture_mesh.glb` file using an **absolute file path**. At this point, the scene should contain `/World/gauss` for Gaussian rendering and `/World/Xform` for mesh-based collisions.  
-- These two assets must then be spatially aligned; in most cases, rotating `/World/Xform` by **180 degrees around the Z axis** is sufficient, although some scenes may also require scaling (commonly ×100) or additional translation and rotation adjustments. Make sure that the Gaussian splats and mesh geometry overlap correctly in the viewport.
+- Before adjusting the mesh, first ensure that `/World/gauss` is **aligned with the world coordinate system** (i.e., its local axes and orientation are consistent with `/World`). Then **align `/World/Xform` to match the Gaussian scene**. In most cases, rotating `/World/Xform` by **180 degrees around the Z axis** is sufficient, although some scenes may also require scaling (commonly ×100) or additional translation and rotation adjustments. In this example, `/World/gauss` is first **rotated 180 degrees around the X axis**, followed by rotating `/World/Xform` **90 degrees around the X axis** and then **180 degrees around the Z axis**. **Make sure that the Gaussian splats and mesh geometry overlap correctly in the viewport.**
 
-https://github.com/user-attachments/assets/9ab50828-8de1-4d55-b243-c320a7c91cac
+https://github.com/user-attachments/assets/e610ee7c-9bf5-4bf8-84fd-e42510012371
 
 #### Step 2: Configure Physics and Colliders for the Mesh
 
 - After alignment is complete, configure physics on the collision mesh. Select `/World/Xform` and add physics using the **Rigid Body with Colliders Preset**, then enable **Kinematic** in the Rigid Body settings so the mesh behaves as a static collision object.  
-- Next, select `/World/Xform/decimated_mesh` and, under **Physics → Collider**, set the **Approximation** mode to `meshSimplification`. This setup provides accurate collision behavior while maintaining good simulation performance.
+- Next, locate the mesh prim under `/World/Xform` (typically `/World/Xform/decimated_mesh` or `/World/Xform/decimated_mesh/Mesh0`, i.e., **the prim whose Type is `Mesh`**).Under **Physics → Collider**, set the **Approximation** mode to `meshSimplification`. This setup provides accurate collision behavior while maintaining good simulation performance.
 
-https://github.com/user-attachments/assets/ab391d89-e228-4476-b55c-cec093ab25f4
+https://github.com/user-attachments/assets/a84133a2-63dd-4182-bc73-e7f3e17e0f0f
 
 #### Step 3: Optimize Visuals and Export the Final USD
 
@@ -73,4 +73,4 @@ https://github.com/user-attachments/assets/ab391d89-e228-4476-b55c-cec093ab25f4
 - **Collision visualization** can be enabled when needed for debugging or inspection.  
 - Once both rendering and collision behavior are verified, **save the combined scene as a single USD file** (for example, `scene.usd`). This USD file will serve as the scene entry point and will be referenced directly by LeIsaac in subsequent task and environment configurations.
 
-https://github.com/user-attachments/assets/59b924ad-2d7c-48b4-b4d4-875af7268438
+https://github.com/user-attachments/assets/0b8ded40-aa41-4e32-9a1d-360a4241ea91
