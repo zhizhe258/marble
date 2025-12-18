@@ -1,111 +1,133 @@
+非常抱歉，之前的回复可能在格式连贯性上出现了疏忽。现在为您提供一份**完全对齐 “Add a Custom Task” 风格**、且内容**绝对完整**的 Markdown 源代码。
+
+这份代码涵盖了从 Marble 生成到 LeIsaac 代码配置的所有步骤，去除了冗余，统一了语气。
+
+```markdown
 # 🚀 Add a Custom Scene in LeIsaac
 
-This tutorial walks you through how to add a **custom scene** in **LeIsaac**, enabling you to build and evaluate a variety of tasks based on your own high-fidelity environments.
+This tutorial walks you through how to add a **custom high-fidelity scene** in **LeIsaac**, enabling you to build and evaluate a variety of tasks based on your own environments.
 
 ---
 
-## 📋 Prerequisites
+## 1. Create Assets in Marble
 
-Before starting, ensure you have the following ready:
-* **Omniverse Isaac Sim** (2023.1.1 or later recommended)
-* **Python 3.10+** environment
-* **NVIDIA RTX GPU** (Compatible with Gaussian Splatting rendering)
+The first step is to generate the digital twin of your environment using the **Marble** platform. 
 
----
-
-## 🛠 Step 1: Prepare the USD Scene
-
-To add a custom scene, you need to bridge the gap between visual Splats and physical Colliders.
-
-### 1.1 Create a World in Marble
+Every task environment in LeIsaac starts with these high-fidelity assets.
 
 1.  Navigate to the **[Marble Platform](https://marble.worldlabs.ai/)**.
-2.  Follow the **[Marble Documentation](https://docs.worldlabs.ai/)** to create your custom world model. 
+2.  Follow the **[Marble Documentation](https://docs.worldlabs.ai/)** to create your custom world model.
 3.  Once satisfied, download the following assets:
-    * **Splats file** (`.ply`)
-    * **High-quality mesh** (`.glb`) — *Recommended for collision accuracy.*
-    * **Collider mesh** (`.glb`) — *Alternative for simpler scenes.*
+    * **Splats file** (`.ply`): Used for high-quality Gaussian visual rendering.
+    * **High-quality mesh** (`.glb`): Recommended for accurate physical collisions.
 
 > [!TIP]
-> **For best results:** Use high-resolution images or videos. It is highly recommended to refine and finalize the **panorama** before generating the full 3D world.
+> **For best results:** Use high-resolution images or videos for generation. It is highly recommended to refine and finalize the **panorama** before generating the full 3D world to ensure consistent lighting.
 
 ---
 
-### 1.2 Convert Splats (PLY) to USDZ
+## 2. Convert Splats to USDZ
 
-Since Isaac Sim renders Gaussian Splats via USD, we use **NVIDIA 3DGrut** for conversion.
+Since Isaac Sim renders Gaussian Splats via USD, you must convert the raw `.ply` data into a USD-compatible format using **NVIDIA 3DGrut**.
 
-#### 1. Install 3DGrut
+### Install 3DGrut
 Clone the repository and follow the official installation instructions:
 **[GitHub: nv-tlabs/3dgrut](https://github.com/nv-tlabs/3dgrut)**
 
 > [!IMPORTANT]
-> **Note for RTX 50-Series GPUs:** > If you encounter installation or kernel issues on the latest hardware, refer to this community fix: [Issue #167](https://github.com/nv-tlabs/3dgrut/issues/167).
+> **Note for RTX 50-Series GPUs:** If you encounter installation or kernel issues on the latest hardware, refer to this community fix: [Issue #167](https://github.com/nv-tlabs/3dgrut/issues/167).
 
-#### 2. Convert PLY to USDZ
-Run the following command in your terminal:
+### Run Conversion
+Execute the following command in your terminal to generate the USDZ file:
 
 ```bash
 python -m threedgrut.export.scripts.ply_to_usd path/to/your/splats.ply \
     --output_file path/to/output.usdz
 
-### 1.3 Integrate Gaussian Rendering and Mesh Collisions in Isaac Sim
-
-In this step, we combine **Gaussian Splatting** (for high-quality visuals) with **Simplified Mesh Geometry** (for physical collisions). This creates a complete USD scene ready for physical interaction in LeIsaac.
+```
 
 ---
 
-#### 🛠 Step 1: Load and Align Assets
+## 3. Integrate Visuals and Collisions
 
-1.  **Load Gaussian Scene**: 
-    * Extract your generated `.usdz` file.
-    * Locate `default.usda` in the extracted folder and drag it into the **Isaac Sim Viewport**. 
-    * This usually creates a prim at `/World/gauss`.
-2.  **Import Collision Mesh**:
-    * In the **Stage** panel, create an Xform at `/World/Xform`.
-    * With the Xform selected, add a **Reference** to your `texture_mesh.glb` file.
-3.  **Spatial Alignment**:
-    * The two assets must overlap perfectly. 
-    * **Common Fix**: Rotate `/World/Xform` by **180° on the Z-axis**.
-    * **Scaling**: Some scenes may require a scale adjustment (e.g., **100x**).
-    * *Verification*: Use the wireframe mode to ensure the mesh aligns with the Gaussian splat visual boundaries.
+In this step, we perform **"Visual-Physics Pairing"**: combining the **Gaussian Splats** (visuals) with the **Mesh Geometry** (physics) inside Isaac Sim to create a simulation-ready scene.
 
-> [!TIP]
-> Always use **absolute file paths** when adding references to ensure the USD scene can find the assets regardless of where it is saved.
+### Step 1: Load and Align Assets
 
-https://github.com/user-attachments/assets/9ab50828-8de1-4d55-b243-c320a7c91cac
+1. **Load Visuals**: Extract your generated `.usdz` file, locate `default.usda`, and drag it into the **Isaac Sim Viewport**. This creates a prim at `/World/gauss`.
+2. **Import Collision Mesh**: In the **Stage** panel, create an Xform at `/World/Xform`. Add a **Reference** to your `texture_mesh.glb` file using an **absolute file path**.
+3. **Spatial Alignment**: The two assets must overlap perfectly.
+* **Common Fix**: Rotate `/World/Xform` by **180° on the Z-axis**.
+* **Scaling**: Some scenes may require a scale adjustment (e.g., **100x**).
+* *Verification*: Use the wireframe mode to ensure the mesh aligns with the Gaussian splat visual boundaries.
+
+
+
+https://www.google.com/search?q=https://github.com/user-attachments/assets/9ab50828-8de1-4d55-b243-c320a7c91cac
+
+### Step 2: Configure Physics and Colliders
+
+To make the mesh interactable while keeping it static:
+
+1. **Add Physics Preset**: Select `/World/Xform` and apply **Add > Physics > Rigid Body with Colliders Preset**.
+2. **Set to Kinematic**: In the **Rigid Body** settings, enable **Kinematic**. This ensures the environment doesn't fall due to gravity.
+3. **Optimize Collider**: Select `/World/Xform/decimated_mesh`. Under **Physics > Collider**, set **Approximation** to `meshSimplification`.
+
+https://www.google.com/search?q=https://github.com/user-attachments/assets/ab391d89-e228-4476-b55c-cec093ab25f4
+
+### Step 3: Visual Optimization and Export
+
+1. **Refine Visibility**: Click the eye icon for `/World/Xform` to hide the mesh geometry. This keeps only the beautiful Gaussian splats visible while preserving underlying collisions.
+2. **Final Export**: Save the combined stage as a single USD file (e.g., `scene.usd`). This will be your primary scene entry point.
+
+https://www.google.com/search?q=https://github.com/user-attachments/assets/59b924ad-2d7c-48b4-b4d4-875af7268438
+
+---
+
+## 4. Add Asset Configuration
+
+Once the scene file is ready, add the asset configuration in code. The root of the LeIsaac source is `source/leisaac/leisaac`.
+
+In `source/leisaac/leisaac`, create `assets/scenes/custom_scene.py` with:
+
+```python
+from pathlib import Path
+
+import isaaclab.sim as sim_utils
+from isaaclab.assets import AssetBaseCfg
+from leisaac.utils.constant import ASSETS_ROOT
+
+"""Configuration for the Custom Scene"""
+SCENES_ROOT = Path(ASSETS_ROOT) / "scenes"
+
+# Point to the USD entry file you just exported
+CUSTOM_SCENE_USD_PATH = str(SCENES_ROOT / "custom_scene" / "scene.usd")
+
+CUSTOM_SCENE_CFG = AssetBaseCfg(
+    spawn=sim_utils.UsdFileCfg(
+        usd_path=CUSTOM_SCENE_USD_PATH,
+    )
+)
+
+```
+
+Here are some notes on the code:
+
+* `CUSTOM_SCENE_USD_PATH` points to the USD entry file for the scene. You can rename the file or variables as needed, just update the references accordingly.
+* `CUSTOM_SCENE_CFG` uses `UsdFileCfg` to define how the asset should be spawned. This configuration will be imported by your task environment configuration.
 
 ---
 
-#### ⚙️ Step 2: Configure Physics and Colliders
+## ✅ Checklist
 
-To make the mesh interactable while keeping it static in the world:
+* [ ] Gaussian scene is visible at `/World/gauss`.
+* [ ] Mesh is set to `Kinematic` and correctly aligned.
+* [ ] Collision approximation is set to `meshSimplification`.
+* [ ] `scene.usd` is saved and referenced correctly in `custom_scene.py`.
 
-1.  **Add Physics Preset**: Select `/World/Xform` and apply **Add > Physics > Rigid Body with Colliders Preset**.
-2.  **Set to Kinematic**: In the **Rigid Body** settings, enable **Kinematic**. This prevents the mesh from falling due to gravity while still allowing it to collide with robots.
-3.  **Optimize Collision Mesh**:
-    * Select `/World/Xform/decimated_mesh`.
-    * Navigate to **Physics > Collider**.
-    * Set **Approximation** to `meshSimplification`. This balances collision accuracy and simulation speed.
+**Next Step:** With your high-fidelity scene prepared, you can now proceed to **[Add a Custom Task](https://www.google.com/search?q=./add_custom_task.md)** to define the robot's behavior!
 
-https://github.com/user-attachments/assets/ab391d89-e228-4476-b55c-cec093ab25f4
+```
 
----
 
-#### 💾 Step 3: Visual Optimization and Export
-
-1.  **Refine Visibility**: You can hide the mesh geometry (click the eye icon for `/World/Xform`) to keep only the beautiful Gaussian splats visible. The physics engine will still recognize the hidden mesh for collisions.
-2.  **Debug Collisions**: If needed, enable **Physics > Show Collisions** to verify the interaction boundaries.
-3.  **Final Export**: Save the stage as a single USD file (e.g., `scene.usd`). 
-
-> [!IMPORTANT]
-> This `scene.usd` file will serve as the entry point for LeIsaac. Ensure all relative paths are correctly maintained if you move the file later.
-
-https://github.com/user-attachments/assets/59b924ad-2d7c-48b4-b4d4-875af7268438
-
----
-**Checklist before moving to Section 1.4:**
-- [ ] Gaussian scene is visible at `/World/gauss`.
-- [ ] Mesh is set to `Kinematic` and correctly aligned.
-- [ ] Collision approximation is set to `meshSimplification`.
-- [ ] Scene is saved as a `.usd` file.
+```
