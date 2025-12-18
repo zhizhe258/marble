@@ -1,52 +1,53 @@
-# Add a Custom Scene in LeIsaac
+# 🚀 Add a Custom Scene in LeIsaac
 
-This tutorial walks you through how to add a **custom scene** in **LeIsaac**, enabling you to build and evaluate a variety of tasks based on your own environments.
+This tutorial walks you through how to add a **custom scene** in **LeIsaac**, enabling you to build and evaluate a variety of tasks based on your own high-fidelity environments.
 
 ---
 
-## Step 1: Prepare the USD Scene
+## 📋 Prerequisites
 
-To add a custom scene in LeIsaac, you first need to prepare a USD-compatible scene using **Marble**.
+Before starting, ensure you have the following ready:
+* **Omniverse Isaac Sim** (2023.1.1 or later recommended)
+* **Python 3.10+** environment
+* **NVIDIA RTX GPU** (Compatible with Gaussian Splatting rendering)
+
+---
+
+## 🛠 Step 1: Prepare the USD Scene
+
+To add a custom scene, you need to bridge the gap between visual Splats and physical Colliders.
 
 ### 1.1 Create a World in Marble
 
-Navigate to the **[Marble platform](https://marble.worldlabs.ai/)**.
+1.  Navigate to the **[Marble Platform](https://marble.worldlabs.ai/)**.
+2.  Follow the **[Marble Documentation](https://docs.worldlabs.ai/)** to create your custom world model. 
+3.  Once satisfied, download the following assets:
+    * **Splats file** (`.ply`)
+    * **High-quality mesh** (`.glb`) — *Recommended for collision accuracy.*
+    * **Collider mesh** (`.glb`) — *Alternative for simpler scenes.*
 
-Follow the instructions in the **[Marble documentation](https://docs.worldlabs.ai/)** to create your custom world model. Once you are satisfied with the result, download the following files:
-
-
-- **Splats file** (`.ply`)
-- **High-quality mesh(recommended)** (`.glb`) or **Collider mesh** (`.glb`)
-
-> **Tips:**  
-> For best results, please use high-resolution images or videos.  
-> It is recommended to refine and finalize the **panorama** before generating the full world.
+> [!TIP]
+> **For best results:** Use high-resolution images or videos. It is highly recommended to refine and finalize the **panorama** before generating the full 3D world.
 
 ---
 
 ### 1.2 Convert Splats (PLY) to USDZ
 
-After obtaining the splats file (`.ply`), it needs to be converted to **USDZ** format using **NVIDIA 3DGrut**.
+Since Isaac Sim renders Gaussian Splats via USD, we use **NVIDIA 3DGrut** for conversion.
 
-#### Install 3DGrut
-Download and install the **[3DGrut](https://github.com/nv-tlabs/3dgrut)**.
+#### 1. Install 3DGrut
+Clone the repository and follow the official installation instructions:
+**[GitHub: nv-tlabs/3dgrut](https://github.com/nv-tlabs/3dgrut)**
 
-Follow the installation instructions provided in the repository.
+> [!IMPORTANT]
+> **Note for RTX 50-Series GPUs:** > If you encounter installation or kernel issues on the latest hardware, refer to this community fix: [Issue #167](https://github.com/nv-tlabs/3dgrut/issues/167).
 
-> **Note (RTX 50-Series GPUs):**  
-> If you encounter installation issues on RTX 50-series GPUs, here might be helpful:  
-> https://github.com/nv-tlabs/3dgrut/issues/167
-
-#### Convert PLY to USDZ
-
-To convert splat data **PLY format** to **USDZ** format, run the following command:
+#### 2. Convert PLY to USDZ
+Run the following command in your terminal:
 
 ```bash
 python -m threedgrut.export.scripts.ply_to_usd path/to/your/splats.ply \
     --output_file path/to/output.usdz
-```
-
----
 
 ### 1.3 Integrate Gaussian Rendering and Mesh Collisions in Isaac Sim
 
