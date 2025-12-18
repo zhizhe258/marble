@@ -16,17 +16,17 @@ Follow the instructions in the **[Marble documentation](https://docs.worldlabs.a
 
 
 - **Splats file** (`.ply`)
-- **High-quality mesh** (`.glb`)
+- **High-quality mesh(recommended)** (`.glb`) or **Collider mesh** (`.glb`)
 
 > **Tips:**  
 > For best results, please use high-resolution images or videos.  
-> It is recommended to refine and finalize the **panorama** before generating the full world.  
+> It is recommended to refine and finalize the **panorama** before generating the full world.
 
 ---
 
 ### 1.2 Convert Splats (PLY) to USDZ
 
-After obtaining the splats file (`.ply`), convert it into **USDZ** format using **NVIDIA 3DGrut**.
+After obtaining the splats file (`.ply`), it needs to be converted to **USDZ** format using **NVIDIA 3DGrut**.
 
 #### Install 3DGrut
 Download and install the **[3DGrut](https://github.com/nv-tlabs/3dgrut)**.
@@ -39,7 +39,7 @@ Follow the installation instructions provided in the repository.
 
 #### Convert PLY to USDZ
 
-If you have existing Gaussian splat data in **PLY format**, run the following command:
+To convert splat data **PLY format** to **USDZ** format, run the following command:
 
 ```bash
 python -m threedgrut.export.scripts.ply_to_usd path/to/your/splats.ply \
