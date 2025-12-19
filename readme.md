@@ -1,6 +1,6 @@
 # Marble × LeIsaac: Large-Scale Generalization and Customization of Embodied Environments
 
-This tutorial walks you through how to integrate Marble-generated scenes into LeIsaac, allowing you to build and evaluate diverse embodied tasks across large-scale generalized environments.
+This tutorial walks you through how to integrate **Marble--Generate** scenes into **LeIsaac**, allowing you to build and evaluate diverse embodied tasks across large-scale generalized environments.
 
 ## 🎥Marble-Generalized Scene Sets
 <table>
@@ -28,7 +28,7 @@ This tutorial walks you through how to integrate Marble-generated scenes into Le
 
 ## Step 1: Prepare the USD Scene
 
-To add a custom scene in LeIsaac, you first need to prepare a USD-compatible scene using **Marble**.
+To add a custom scene in **LeIsaac**, you first need to prepare a USD-compatible scene using **Marble**.
 
 ### 1.1 Create a World in Marble
 
@@ -46,7 +46,7 @@ Follow the instructions in the **[Marble documentation](https://docs.worldlabs.a
 > - For best results, please use high-resolution images or videos.  
 > - It is recommended to refine and finalize the **panorama** before generating the full world.
 > - **Real-world capture tips:** Use an **eye-level view**, maintain a **moderate distance**, and capture the scene **without occlusions**. **Avoid top-down or bottom-up angles** and ensure objects appearing in mirrors are also directly visible.
-> - When possible, **using panorama image** usually improves spatial completeness, background continuity, and overall clarity. Panorama resources can be referenced at: [PolyHaven](https://polyhaven.com/), or you can capture your own **multi-angle images and feed them into Marble.**
+> - When possible, **using panorama image** usually improves spatial completeness, background continuity, and overall clarity. **Panorama** resources can be referenced at: [PolyHaven](https://polyhaven.com/), or you can capture your own **multi-angle images and feed them into Marble.**
 
 ---
 
@@ -90,7 +90,7 @@ https://github.com/user-attachments/assets/e610ee7c-9bf5-4bf8-84fd-e42510012371
 
 #### 1.3.2: Configure Physics and Colliders for the Mesh
 
-- After alignment is complete, configure physics on the collision mesh. Select `/World/Xform` and add physics using the **Rigid Body with Colliders Preset**, then enable **Kinematic** in the Rigid Body settings so the mesh behaves as a static collision object.  
+- After alignment is complete, configure physics on the collision mesh. Select `/World/Xform` and add physics using the **Rigid Body with Colliders Preset**, then enable **Kinematic** in the **Rigid Body** settings so the mesh behaves as a static collision object.  
 - Next, locate the mesh prim under `/World/Xform` (typically `/World/Xform/decimated_mesh` or `/World/Xform/decimated_mesh/Mesh0`, i.e., **the prim whose Type is `Mesh`**).Under **Physics → Collider**, set the **Approximation** mode to `meshSimplification`. This setup provides accurate collision behavior while maintaining good simulation performance.
 
 https://github.com/user-attachments/assets/a84133a2-63dd-4182-bc73-e7f3e17e0f0f
@@ -106,8 +106,8 @@ https://github.com/user-attachments/assets/0b8ded40-aa41-4e32-9a1d-360a4241ea91
 
 ## Step 2: Scene Composition for Tasks
 
-Some manipulation tasks in LeIsaac (e.g., **cloth folding**, **toy cleaning**) are executed **on a table surface**.
-To support a wide range of custom scenes, LeIsaac separates:
+Some manipulation tasks in **LeIsaac** (e.g., **cloth folding**, **toy cleaning**) are executed **on a table surface**.
+To support a wide range of custom scenes, **LeIsaac** separates:
 
 * **Background scene**
 * **Robot**
@@ -121,7 +121,7 @@ This design makes task execution more robust across different environments.
 
 #### 2.1.1: Place the Robot
 
-1. Run isaacsim and load the background USD exported in **Step 1.3**.
+1. Run **Isaacsim** and load the background USD exported in **Step 1.3**.
 2. Create a new `Xform`.
 3. Add the **SO101 Follower** USD as a **reference** under this `Xform`.
 4. Drag the robot to the desired pose in the scene.
@@ -195,8 +195,8 @@ The table USD files are located under the corresponding task directories in
 
 #### 2.2.1: Place the Table
 1. Create a new `Xform` prim for the table.
-2. Add the Table USD as a **reference** under this `Xform`.
-3. Disable physics of the loaded table USD.
+2. Add the **Table USD** as a **reference** under this `Xform`.
+3. Disable **physics** of the loaded table USD.
 4. apply **Rigid Body with Colliders Preset** to the`Xform`.
 5. Move the table into place and press **Play** once to let it settle under gravity.
 6. Record the table transform:
