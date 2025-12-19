@@ -8,7 +8,7 @@ This tutorial walks you through how to add a **custom scene** in **LeIsaac**, en
     <td width="50%" align="center">
       <div>
         <video
-          src="https://github.com/user-attachments/assets/3cb52d1e-827d-4047-b010-e347bea0ad41"
+          src="https://github.com/user-attachments/assets/5919f96d-b93c-449e-b0b6-a39114faa4a9"
           controls
         ></video>
       </div>
@@ -16,7 +16,7 @@ This tutorial walks you through how to add a **custom scene** in **LeIsaac**, en
     <td width="50%" align="center">
       <div>
         <video
-          src="https://github.com/user-attachments/assets/5919f96d-b93c-449e-b0b6-a39114faa4a9"
+          src="https://github.com/user-attachments/assets/3cb52d1e-827d-4047-b010-e347bea0ad41"
           controls
         ></video>
       </div>
