@@ -46,7 +46,7 @@ Follow the instructions in the **[Marble documentation](https://docs.worldlabs.a
 > - For best results, please use high-resolution images or videos.  
 > - It is recommended to refine and finalize the **panorama** before generating the full world.
 > - **Real-world capture tips:** Use an **eye-level view**, maintain a **moderate distance**, and capture the scene **without occlusions**. **Avoid top-down or bottom-up angles** and ensure objects appearing in mirrors are also directly visible.
-> - When possible, **using panorama image** usually improves spatial completeness, background continuity, and overall clarity. Panorama resources: [PolyHaven](https://polyhaven.com/), or you can capture your own **multi-angle images and feed them into Marble.**
+> - When possible, **using panorama image** usually improves spatial completeness, background continuity, and overall clarity. Panorama resources can be referenced at: [PolyHaven](https://polyhaven.com/), or you can capture your own **multi-angle images and feed them into Marble.**
 
 ---
 
