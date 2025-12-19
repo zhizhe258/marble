@@ -125,7 +125,7 @@ This design makes task execution more robust across different environments.
 3. Add the **SO101 Follower** USD as a **reference** under this `Xform`.
 4. Drag the robot to the desired pose in the scene.
 
-
+The Robot USD files are located in `assets/robots`:
 
 Record the robot transform:
 
@@ -143,7 +143,7 @@ https://github.com/user-attachments/assets/7bec4bf1-4c99-4495-9668-32377c7dcb61
 
 
 #### Step 2: Compose the Scene
-To compose the scene, use the recorded **robot transform** as the target pose
+To compose the scene with the assets, use the recorded **robot transform** as the target pose
 by passing it to `--target-pos` and `--target-quat`.
 
 Run the following script:
@@ -151,7 +151,7 @@ Run the following script:
 ```bash
 python scripts/tutorials/marble_compose.py \
   --task your_task \
-  --background path/to/scene.usd \
+  --background path/to/background_scene.usd \
   --output path/to/output.usd \
   --assets-base /path/to/assets \
   --target-pos X Y Z \
@@ -163,7 +163,7 @@ python scripts/tutorials/marble_compose.py \
 
 * `--task`: Task type (`toys`, `orange`, `cloth`, `cube`).
 * `--background`: Background scene USD (from Step 1.3).
-* `--output`: Output composed USD path.
+* `--output`: Output USD path.
 * `--assets-base`: Base directory for task-related asset USDs.
 * `--target-pos`: Robot position `(x, y, z)`.
 * `--target-quat`: Robot orientation quaternion `(w, x, y, z)`.
@@ -175,17 +175,21 @@ python scripts/tutorials/marble_compose.py \
 </details>
 
 > 💡 **Why include a table option?**
-> Custom scenes may not have a reliable table.
+> Custom background scenes may not have a reliable table.
 > Enabling `--include-table` inserts a well-tested table asset to ensure stable task execution.
 
 ---
 
 ### 2.2 Table Replacement
 
-Applicable to **cloth** and **toyroom** tasks.
+Applicable to **cloth** and **toys** tasks.
 
 Use this option if your background scene does not provide a stable table surface.
-The table USD file can be found under the corresponding task directory in the `assets/scenes` folder.
+The table USD files are located under the corresponding task directories in
+`assets/scenes`:
+
+* **toys**: `KidRoom_Table01`
+* **cloth**: `Table038`
 
 Steps:
 
