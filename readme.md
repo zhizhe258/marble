@@ -40,11 +40,14 @@ https://www.google.com/search?q=https://github.com/user-attachments/assets/59b92
 ### 4.1 Add Robot Asset to the Scene
 
 Load the scene and create an `Xform` prim.  
-Add the SO101 Follower USD as a reference under this `Xform`, then drag the robot to the desired pose.
+Add the **SO101 Follower** USD as a reference under this `Xform`, then drag the robot to the desired pose.
 
 Record the final transform:
-- Translation `(x, y, z)`
-- Orientation: quaternion **(w, x, y, z)**
+- **Translation**: `(x, y, z)`
+- **Orientation**: quaternion **(w, x, y, z)**
+
+> 💡 If you are using a **dual-arm setup**, see [Dual-Arm Configuration](#dual-arm-configuration).  
+> 💡 If you want to replace the default table for **toys** or **cloth** tasks, see [Table Replacement](#table-replacement-optional).
 
 Then run the following script:
 
@@ -57,15 +60,15 @@ python scripts/tutorials/marble_compose.py \
   --target-pos X Y Z \
   --target-quat W X Y Z
 ````
-For dual arm task, please refer to the dual arm option in below.
-for toys and cloth task, if you wanna add the whole table with other assets, please refer to the table option later.
+
 <details>
 <summary><strong>Parameter descriptions for marble_compose.py</strong></summary>
 
 * `--task`: Task type to configure.
   Supported values: `toys`, `orange`, `cloth`, `cube`.
 
-* `--background`: Path to the background scene USD(the scene created via marble).
+* `--background`: Path to the background scene USD
+  (the scene created via **marble**).
 
 * `--output`: Output path of the composed USD scene.
 
@@ -75,9 +78,11 @@ for toys and cloth task, if you wanna add the whole table with other assets, ple
 
 * `--target-quat`: Target robot orientation quaternion `(w, x, y, z)`.
 
-* `--include-table`: Include a task-specific table in the composed scene.
+* `--include-table`: Include a task-specific table in the composed scene
+  (see [Table Replacement](#table-replacement-optional)).
 
-* `--dual-arm`: Enable dual-arm configuration.
+* `--dual-arm`: Enable dual-arm configuration
+  (see [Dual-Arm Configuration](#dual-arm-configuration)).
   Only supported for `toys` and `cloth`; the **left arm** is used as the reference.
 
 </details>
@@ -88,16 +93,20 @@ for toys and cloth task, if you wanna add the whole table with other assets, ple
 
 Applicable to **cloth** and **toyroom** tasks.
 
+Use this option if you want to include the **full table and related assets** instead of the default table.
+
 1. Add a new `Xform` prim for the table.
 2. Reference the task-specific table USD.
-3. Disable physics property from the original table.
+3. Disable physics properties on the original table.
 4. Add a **Collider** and required physics to the new table.
-5. Move the table to the desired pose and press **Play** once to let it settle under gravity. This can ensure a good stability in the later colletion.
-6. Record the table transform .
-- Translation `(x, y, z)`
-- Orientation: quaternion **(w, x, y, z)**
+5. Move the table to the desired pose and press **Play** once to let it settle under gravity.
+   This helps ensure stability during later data collection.
+6. Record the table transform:
 
-Then run the following script:
+   * **Translation**: `(x, y, z)`
+   * **Orientation**: quaternion **(w, x, y, z)**
+
+Then run the script with `--include-table` enabled:
 
 ```bash
 python scripts/tutorials/marble_compose.py \
@@ -106,15 +115,15 @@ python scripts/tutorials/marble_compose.py \
   --output path/to/output.usd \
   --assets-base /path/to/assets \
   --target-pos X Y Z \
-  --target-quat W X Y Z
+  --target-quat W X Y Z \
   --include-table
-````
+```
 
 ---
 
 ## Dual-Arm Configuration
 
-The dual-arm setup follows the same procedure as the single-arm workflow with one requirement:
+The dual-arm setup follows the same workflow as the single-arm configuration, with **one important constraint**:
 
 > [!IMPORTANT]
 > **Left-arm reference**
@@ -122,7 +131,8 @@ The dual-arm setup follows the same procedure as the single-arm workflow with on
 > The system uses the left arm transform as the global reference.
 
 All other steps remain unchanged.
-Then run the following script:
+
+To enable dual-arm mode, run:
 
 ```bash
 python scripts/tutorials/marble_compose.py \
@@ -131,9 +141,11 @@ python scripts/tutorials/marble_compose.py \
   --output path/to/output.usd \
   --assets-base /path/to/assets \
   --target-pos X Y Z \
-  --target-quat W X Y Z
-  --include-table
+  --target-quat W X Y Z \
+  --include-table \
   --dual-arm
-````
+```
 
 ```
+
+
