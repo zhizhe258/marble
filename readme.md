@@ -134,7 +134,11 @@ Record the robot transform:
 
 
 
-https://github.com/user-attachments/assets/9fb82505-ef36-4d86-a913-919b1866ed83
+
+https://github.com/user-attachments/assets/7bec4bf1-4c99-4495-9668-32377c7dcb61
+
+
+
 
 
 
@@ -198,7 +202,11 @@ Steps:
 
 
 
-https://github.com/user-attachments/assets/86ca6e7b-20dd-4445-889e-f57d8f35511c
+
+https://github.com/user-attachments/assets/bad40949-788b-4c43-98aa-2b80aee122d5
+
+
+
 
 
 
