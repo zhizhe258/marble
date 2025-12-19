@@ -1,8 +1,8 @@
-# Add a Custom Scene in LeIsaac
+# Marble × LeIsaac: Large-Scale Generalization and Customization of Embodied Environments
 
-This tutorial walks you through how to add a **custom scene** in **LeIsaac**, enabling you to build and evaluate a variety of tasks based on your own environments.
+This tutorial walks you through how to integrate Marble-generated scenes into LeIsaac, allowing you to build and evaluate diverse embodied tasks across large-scale generalized environments.
 
-## 🎥 Custom Scene Simulation
+## Custom Scene Simulation
 <table>
   <tr>
     <td width="50%" align="center">
