@@ -2,7 +2,27 @@
 
 This tutorial walks you through how to add a **custom scene** in **LeIsaac**, enabling you to build and evaluate a variety of tasks based on your own environments.
 
-https://github.com/user-attachments/assets/3cb52d1e-827d-4047-b010-e347bea0ad41
+## 🎥 Custom Scene Simulation
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <div>
+        <video
+          src="https://github.com/user-attachments/assets/3cb52d1e-827d-4047-b010-e347bea0ad41"
+          controls
+        ></video>
+      </div>
+    </td>
+    <td width="50%" align="center">
+      <div>
+        <video
+          src="https://github.com/user-attachments/assets/5919f96d-b93c-449e-b0b6-a39114faa4a9"
+          controls
+        ></video>
+      </div>
+    </td>
+  </tr>
+</table>
 
 ---
 
