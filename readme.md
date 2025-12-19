@@ -2,6 +2,8 @@
 
 This tutorial walks you through how to add a **custom scene** in **LeIsaac**, enabling you to build and evaluate a variety of tasks based on your own environments.
 
+https://github.com/user-attachments/assets/3cb52d1e-827d-4047-b010-e347bea0ad41
+
 ---
 
 ## Step 1: Prepare the USD Scene
