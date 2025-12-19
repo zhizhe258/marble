@@ -303,9 +303,24 @@ python scripts/environments/teleoperation/teleop_se3_agent.py \
 ```
 
 
-[notable_record.webm](https://github.com/user-attachments/assets/b64f6e5b-c97f-45bf-be9d-308af2d4adee)
-
-
-
-
-https://github.com/user-attachments/assets/3a4a9fa9-f755-43c4-afbd-7502cae7f1d9
+#### Results Example
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <div>
+        <video
+          src="https://github.com/user-attachments/assets/5919f96d-b93c-449e-b0b6-a39114faa4a9](https://github.com/user-attachments/assets/b64f6e5b-c97f-45bf-be9d-308af2d4adee"
+          controls
+        ></video>
+      </div>
+    </td>
+    <td width="50%" align="center">
+      <div>
+        <video
+          src="[https://github.com/user-attachments/assets/3cb52d1e-827d-4047-b010-e347bea0ad41](https://github.com/user-attachments/assets/3a4a9fa9-f755-43c4-afbd-7502cae7f1d9)"
+          controls
+        ></video>
+      </div>
+    </td>
+  </tr>
+</table>
