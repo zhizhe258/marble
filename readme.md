@@ -78,7 +78,7 @@ https://github.com/user-attachments/assets/0b8ded40-aa41-4e32-9a1d-360a4241ea91
 
 
 
-### 4.1 Add Robot Asset to the Scene
+### 1.4 Add Robot Asset to the Scene
 
 Some manipulation tasks(folding clothes, clean toys) in this project are **executed on a table surface**.  
 Therefore, the scene composition process separates the **robot**, **task assets**, and  the **table** to give you more options when building custom scenes.
@@ -138,7 +138,7 @@ python scripts/tutorials/marble_compose.py \
 
 ---
 
-## Table Replacement
+#### Table Replacement
 
 Applicable to **cloth** and **toyroom** tasks.
 
@@ -176,7 +176,7 @@ python scripts/tutorials/marble_compose.py \
 
 ---
 
-## Dual-Arm Configuration
+#### Dual-Arm Configuration
 
 By default, the setup assumes a **single-arm** SO101 robot.
 If your task requires **two arms**, you can enable dual-arm mode.
