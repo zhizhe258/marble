@@ -51,19 +51,21 @@ Then run the following script:
 ```bash
 python scripts/tutorials/marble_compose.py \
   --task your_task \
-  --background path/of/your/scene.usd \
-  --output path/of/your/output.usd \
+  --background path/to/scene.usd \
+  --output path/to/output.usd \
   --assets-base /path/to/assets \
   --target-pos X Y Z \
   --target-quat W X Y Z
 ````
-
+For dual arm task, please refer to the dual arm option in below.
+for toys and cloth task, if you wanna add the whole table with other assets, please refer to the table option later.
 <details>
 <summary><strong>Parameter descriptions for marble_compose.py</strong></summary>
 
-* `--task`: Task type. Supported values: `toys`, `orange`, `cloth`, `cube`.
+* `--task`: Task type to configure.
+  Supported values: `toys`, `orange`, `cloth`, `cube`.
 
-* `--background`: Path to the background scene USD.
+* `--background`: Path to the background scene USD(the scene created via marble).
 
 * `--output`: Output path of the composed USD scene.
 
@@ -76,62 +78,62 @@ python scripts/tutorials/marble_compose.py \
 * `--include-table`: Include a task-specific table in the composed scene.
 
 * `--dual-arm`: Enable dual-arm configuration.
-  Only supported for `toys` and `cloth` tasks; the **left arm** is used as the reference.
+  Only supported for `toys` and `cloth`; the **left arm** is used as the reference.
 
 </details>
 
+---
 
+## Table Replacement (Optional)
 
-### 4.2 Table Replacement for Cloth and Toyroom Tasks (Optional)
+Applicable to **cloth** and **toyroom** tasks.
 
-For **cloth** and **toyroom** tasks, an alternative configuration is provided that replaces the default table.
+1. Add a new `Xform` prim for the table.
+2. Reference the task-specific table USD.
+3. Disable physics property from the original table.
+4. Add a **Collider** and required physics to the new table.
+5. Move the table to the desired pose and press **Play** once to let it settle under gravity. This can ensure a good stability in the later colletion.
+6. Record the table transform .
+- Translation `(x, y, z)`
+- Orientation: quaternion **(w, x, y, z)**
 
-1. **Create a new `Xform`**
-   - Add a new `Xform` prim for the table.
+Then run the following script:
 
-2. **Add the task-specific table**
-   - Reference the appropriate table USD based on the task type:
-     - `cloth`
-     - `toyroom`
-
-3. **Remove original table physics**
-   - Disable or remove the physics properties of the original table in the scene.
-
-4. **Add physics to the new table**
-   - Add a **collider** and necessary physics properties to the newly created table `Xform`.
-
-5. **Adjust table placement**
-   - Drag the table to the desired position.
-   - For precise placement:
-     - Click the **Play** button to let the table settle and firmly contact the ground.
-
-6. **Record the transformation**
-   - Record the table’s:
-     - Translation `(x, y, z)`
-     - Orientation (Quaternion **WXYZ**)
-
-7. **Generate the updated scene**
-   - Run the provided script using the recorded table transformation.
-   - A new USD scene with the replaced table will be generated.
+```bash
+python scripts/tutorials/marble_compose.py \
+  --task your_task \
+  --background path/to/scene.usd \
+  --output path/to/output.usd \
+  --assets-base /path/to/assets \
+  --target-pos X Y Z \
+  --target-quat W X Y Z
+  --include-table
+````
 
 ---
 
-### 4.3 Dual-Arm Task Configuration
+## Dual-Arm Configuration
 
-For **dual-arm tasks**, the workflow remains largely the same with one important constraint:
+The dual-arm setup follows the same procedure as the single-arm workflow with one requirement:
 
-- When adding the robot:
-  - **Always drag and place the left arm**
-  - The left arm is used as the **reference arm** for the task setup
+> [!IMPORTANT]
+> **Left-arm reference**
+> When placing the robot, always drag and align using the **left arm**.
+> The system uses the left arm transform as the global reference.
 
-All other steps (creating `Xform`, recording transforms, generating the scene, and updating asset paths) follow the same procedure as described above.
+All other steps remain unchanged.
+Then run the following script:
 
----
+```bash
+python scripts/tutorials/marble_compose.py \
+  --task your_task \
+  --background path/to/scene.usd \
+  --output path/to/output.usd \
+  --assets-base /path/to/assets \
+  --target-pos X Y Z \
+  --target-quat W X Y Z
+  --include-table
+  --dual-arm
+````
 
-### Notes & Best Practices
-
-- Always verify that the **asset base path** is correctly set before running any script.
-- Double-check quaternion order: **WXYZ**, not XYZW.
-- Use teleoperation scripts as the final validation step before running task logic.
-- Keep a record of all transformation parameters for reproducibility.
-
+```
