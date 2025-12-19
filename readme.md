@@ -39,6 +39,8 @@ Follow the instructions in the **[Marble documentation](https://docs.worldlabs.a
 
 - **Splats file** (`.ply`)
 - **High-quality mesh(recommended)** (`.glb`) or **Collider mesh** (`.glb`)
+  ![20251219-115058](https://github.com/user-attachments/assets/c194fae8-bb7d-419e-89b8-f1d6503235f6)
+
 
 > **Tips:**  
 > For best results, please use high-resolution images or videos.  
