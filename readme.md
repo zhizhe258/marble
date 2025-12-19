@@ -127,6 +127,12 @@ Record the robot transform:
 * **Translation**: **(x, y, z)**
 * **Orientation**: quaternion **(w, x, y, z)**
 
+
+
+https://github.com/user-attachments/assets/9fb82505-ef36-4d86-a913-919b1866ed83
+
+
+
 #### Step 2: Compose the Scene
 To compose the scene, please run the follwing script:
 
@@ -179,6 +185,12 @@ Steps:
 
    * **Translation**: `(x, y, z)`
    * **Orientation**: quaternion **(w, x, y, z)**
+  
+
+
+https://github.com/user-attachments/assets/56c705a6-6ecf-4e40-851e-024dade9f918
+
+
 
 To compose the scene, please run the follwing script:
 
@@ -278,6 +290,7 @@ python scripts/environments/teleoperation/teleop_se3_agent.py \
     --dataset_file=./datasets/dataset.hdf5
 ```
 
+[notable_record.webm](https://github.com/user-attachments/assets/b64f6e5b-c97f-45bf-be9d-308af2d4adee)
 
 
 
