@@ -2,7 +2,7 @@
 
 This tutorial walks you through how to integrate Marble-generated scenes into LeIsaac, allowing you to build and evaluate diverse embodied tasks across large-scale generalized environments.
 
-## 🎥Custom Scene Simulation
+## 🎥Marble-Generalized Scene Sets
 <table>
   <tr>
     <td width="50%" align="center">
