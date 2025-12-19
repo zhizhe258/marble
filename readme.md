@@ -78,7 +78,7 @@ python -m threedgrut.export.scripts.ply_to_usd path/to/your/splats.ply \
 
 In this step, we combine **Gaussian Splatting** for high-quality visual rendering with **mesh geometry** for accurate physical collisions.The result is a single, complete USD scene **as the background scene** for the next step.
 
-#### Step 1: Load and Align the Gaussian Scene and Collision Mesh
+#### 1.3.1: Load and Align the Gaussian Scene and Collision Mesh
 
 - Begin by double-clicking the generated `.usdz` file to extract its contents. Locate `default.usda` in the extracted folder and drag it into the **Isaac Sim GUI viewport** to load the Gaussian splatting scene used for rendering.  
 - Next, in the **Stage** panel, create an Xform at `/World/Xform`, select it, and add a reference to the `texture_mesh.glb` file using an **absolute file path**. At this point, the scene should contain `/World/gauss` for Gaussian rendering and `/World/Xform` for mesh-based collisions.  
@@ -88,14 +88,14 @@ In this step, we combine **Gaussian Splatting** for high-quality visual renderin
 
 https://github.com/user-attachments/assets/e610ee7c-9bf5-4bf8-84fd-e42510012371
 
-#### Step 2: Configure Physics and Colliders for the Mesh
+#### 1.3.2: Configure Physics and Colliders for the Mesh
 
 - After alignment is complete, configure physics on the collision mesh. Select `/World/Xform` and add physics using the **Rigid Body with Colliders Preset**, then enable **Kinematic** in the Rigid Body settings so the mesh behaves as a static collision object.  
 - Next, locate the mesh prim under `/World/Xform` (typically `/World/Xform/decimated_mesh` or `/World/Xform/decimated_mesh/Mesh0`, i.e., **the prim whose Type is `Mesh`**).Under **Physics → Collider**, set the **Approximation** mode to `meshSimplification`. This setup provides accurate collision behavior while maintaining good simulation performance.
 
 https://github.com/user-attachments/assets/a84133a2-63dd-4182-bc73-e7f3e17e0f0f
 
-#### Step 3: Optimize Visuals and Export the Final USD
+#### 1.3.3: Optimize Visuals and Export the Final USD
 
 - For improved visual quality, you may optionally **hide the mesh geometry and keep only the Gaussian splats visible**, while still preserving the underlying collision volumes.  
 - **Collision visualization** can be enabled when needed for debugging or inspection.  
@@ -119,7 +119,7 @@ This design makes task execution more robust across different environments.
 
 ### 2.1 Add Robot Asset to the Scene
 
-#### Step 1: Place the Robot
+#### 2.1.1: Place the Robot
 
 1. Run isaacsim and load the background USD exported in **Step 1.3**.
 2. Create a new `Xform`.
@@ -143,7 +143,7 @@ https://github.com/user-attachments/assets/7bec4bf1-4c99-4495-9668-32377c7dcb61
 
 
 
-#### Step 2: Compose the Scene
+#### 2.1.2: Compose the Scene
 To compose the scene with the assets, use the recorded **robot transform** as the target pose
 by passing it to `--target-pos` and `--target-quat`.
 
